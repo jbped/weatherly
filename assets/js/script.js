@@ -1,7 +1,9 @@
 var defaultCity = "Salt Lake City"
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather"
-var apiKey = "&appid=8740010d5ce12cafca0e2a2a6e2bcf85"
-var apiQuery = "?q="
+var apiUrl = "https://api.openweathermap.org/data/2.5/"
+var currentApi = "weather?"
+var forecastApi = "onecall?"
+var forecastExclude = "&exclude=minutely,hourly"
+var apiKey = "&units=imperial&appid=8740010d5ce12cafca0e2a2a6e2bcf85"
 
 // CURRENT LOCATION -------------------------------------------- START
 // On page load get current location or display default city
@@ -23,15 +25,15 @@ function success(pos) {
 
     $("#location-title").text("Current Location")
 
-    // fetch(
-    //     apiUrl + "?lat=" + lat + "&lon=" + lon + apiKey
-    // )
-    // .then(function(response){
-    //     return response.json();
-    // })
-    // .then(function(response){
+    fetch(
+        apiUrl + forecastApi + "lat=" + lat + "&lon=" + lon + forecastExclude + apiKey
+    )
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(response){
 
-    // })
+    })
   }
   
 function error(err) {
