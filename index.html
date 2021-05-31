@@ -14,8 +14,8 @@
         <div class="row">
             <h1 class="col-lg-6">Weatherly</h1>
             <!-- Location search bar -->
-            <div id="search-bar col-lg-6">
-                <formc id="search-form" class="form-inline">
+            <div id="search-bar" class="col-lg-6 d-flex align-items-center">
+                <form id="search-form" class="form-inline">
                     <!-- Search input -->
                     <input type="text" name="location-search" id="location-search" class="form-control mr-2" spellcheck="true" placeholder="Enter City or ZIP Code" autocapitalize="word">
                     <!-- Search Submit -->
@@ -29,14 +29,14 @@
         <!-- Current/Searched Location Current Weather -->
         <section class="row mt-5">
             <div id="location-container" class="col-lg-8 container">
-                <div id="location-row" class="row">
+                <div id="location-row" class="row h-100">
                     <!-- Current Weather widget -->
-                    <figure id="location-widget" class="col-lg-6 bg-dark">
-                        <h4 id="current-temp">79&deg;</h4>
-                        <h3 id="location-title">TBD</h3>
+                    <figure id="location-widget" class="col-lg-6 bg-dark mb-0 d-flex flex-column">
+                        <h4 id="current-temp" class="ml-auto text-light">79&deg;</h4>
+                        <h3 id="location-title" class="ml-auto mt-auto text-light">TBD</h3>
                     </figure>
                     <!-- Current Weather stats -->
-                    <article id="location-info" class=col-lg-6>
+                    <article id="location-info" class="col-lg-6 d-flex flex-column justify-content-between">
                         <h5>Date: <span id="current-date"></span></h5>
                         <h6>Weather: <span id="current-weather"></span></h6>
                         <h6>Wind speed: <span id="current-wind"></span></h6>
@@ -47,9 +47,9 @@
             </div>
             <!-- Previous Search Items -->
             <div id="prev-locations" class="col-lg-4">
-                <h3 id="previous-location">Previous Locations:</h3>
-                <section id="previous-search">
-                </section>
+                <h3 id="previous-location-title">Previous Locations:</h3>
+                <div id="prev-loc-cont" class="list-group">
+                </div>
             </div>
         </section>
         <!-- Current/Searched Location 5-Day Forecast -->

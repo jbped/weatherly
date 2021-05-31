@@ -62,13 +62,13 @@ $("#search-form").submit(function(event){
     event.preventDefault();
     var search =  $(this).children("#location-search").val().trim();
     $("#location-search").val("");
-    if(search > 0 && search < 99999) {
+    if(search > 10000 && search < 99999) {
         var city = null;
         var zip = search;
         console.log("Zip Code");
         locationSearch(city, zip);
         locArrHandler(search);
-    } else if (!search) {
+    } else if (!search || search < 10000) {
         alert("Please provide a city or ZIP code in the search bar. Thank you!")
         console.log("No location provided in search bar")
     } else {
@@ -107,19 +107,23 @@ var locArrHandler = function(search) {
     }
 }
 
+$("button").click(function(target){
+    console.log("Click")
+    var prevLoc = $(target);
+    console.log(prevLoc)
+})
 
 
 var renderLocArr = function() {
-    var locationUl = $("<div></div>").addClass("list-group");
+    var prevLocCont = $("#prev-loc-cont");
+    prevLocCont.html("")
     for (var i = 0; i < locationArr.length; i++) {
         var location = $("<button></button>")
-            .attr("prev-loc", i)
+            .attr("id", "prev-loc-" + i)
             .addClass("list-group-item list-group-item-action prev-loc")
             .text(locationArr[i]);
-        locationUl.append(location);
+        prevLocCont.append(location);
     }
-    $("#previous-search").html("")
-    $("#previous-search").append(locationUl);
 }
 
 var locationSearch = function(city, zip) {
