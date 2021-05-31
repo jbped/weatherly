@@ -15,11 +15,11 @@
             <h1 class="col-lg-6">Weatherly</h1>
             <!-- Location search bar -->
             <div id="search-bar" class="col-lg-6 d-flex align-items-center">
-                <form id="search-form" class="form-inline">
+                <form id="search-form" class="form-inline w-100 flex-nowrap">
                     <!-- Search input -->
-                    <input type="text" name="location-search" id="location-search" class="form-control mr-2" spellcheck="true" placeholder="Enter City or ZIP Code" autocapitalize="word">
+                    <input type="text" name="location-search" id="location-search" class="form-control mr-2 flex-grow-1 flex-sm-shrink-0" spellcheck="true" placeholder="Enter City or ZIP Code" autocapitalize="word" size="0" min-width="auto">
                     <!-- Search Submit -->
-                    <button id="search-btn" class="btn btn-primary">Search</button>
+                    <button id="search-btn" class="btn btn-primary" >Search</button>
                 </form>
             </div>
         </div>
@@ -27,7 +27,7 @@
     <!-- Current/Searched Location Weather -->
     <main class="container">
         <!-- Current/Searched Location Current Weather -->
-        <section class="row mt-5">
+        <section class="row mt-5 d-flex">
             <div id="location-container" class="col-lg-8 container">
                 <div id="location-row" class="row h-100">
                     <!-- Current Weather widget -->
@@ -46,15 +46,15 @@
                 </div>
             </div>
             <!-- Previous Search Items -->
-            <div id="prev-locations" class="col-lg-4">
+            <div id="prev-locations" class="col-lg-4 order-sm-1">
                 <h3 id="previous-location-title">Previous Locations:</h3>
                 <div id="prev-loc-cont" class="list-group">
                 </div>
             </div>
         </section>
         <!-- Current/Searched Location 5-Day Forecast -->
-        <section class="row mt-5">
-            <div class="card col mr-2">
+        <section class="row mt-5 d-flex justify-content-between pr-3 pl-3">
+            <div class="card col-lg col-sm-12">
                 <div id="day-one-body" class="card-body">
                     <h5 id="day-one-title" class="card-title">Day 1</h5>
                     <p id="day-one-temp">Temperature: <span>To be filled</span></p>
@@ -62,7 +62,7 @@
                     <p id="day-one-humidity">Humidity: <span>To be filled</span></p>
                 </div>
             </div>
-            <div class="card col mr-2">
+            <div class="card col-lg col-sm-12">
                 <div id="day-two-body" class="card-body">
                     <h5 id="day-two-title" class="card-title">Day 2</h5>
                     <p id="day-two-temp">Temperature: <span>To be filled</span></p>
@@ -70,7 +70,7 @@
                     <p id="day-two-humidity">Humidity: <span>To be filled</span></p>
                 </div>
             </div>
-            <div class="card col mr-2">
+            <div class="card col-lg col-sm-12">
                 <div id="day-three-body" class="card-body">
                     <h5 id="day-three-title" class="card-title">Day 3</h5>
                     <p id="day-three-temp">Temperature: <span>To be filled</span></p>
@@ -78,7 +78,7 @@
                     <p id="day-three-humidity">Humidity: <span>To be filled</span></p>
                 </div>
             </div>
-            <div class="card col mr-2">
+            <div class="card col-lg col-sm-12">
                 <div id="day-four-body" class="card-body">
                     <h5 id="day-four-title" class="card-title">Day 4</h5>
                     <p id="day-four-temp">Temperature: <span>To be filled</span></p>
@@ -86,7 +86,7 @@
                     <p id="day-four-humidity">Humidity: <span>To be filled</span></p>
                 </div>
             </div>
-            <div class="card col">
+            <div class="card col-lg col-sm-12">
                 <div id="day-five-body" class="card-body">
                     <h5 id="day-five-title" class="card-title">Day 5</h5>
                     <p id="day-five-temp">Temperature: <span>To be filled</span></p>

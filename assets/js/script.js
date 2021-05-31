@@ -3,7 +3,6 @@ var apiUrl = "https://api.openweathermap.org/data/2.5/weather"
 var apiKey = "&appid=8740010d5ce12cafca0e2a2a6e2bcf85"
 var apiQuery = "?q="
 
-
 // CURRENT LOCATION -------------------------------------------- START
 // On page load get current location or display default city
 var options = {
@@ -60,17 +59,35 @@ var saveLocations = function() {
 // Search Location
 $("#search-form").submit(function(event){
     event.preventDefault();
+    clearActiveBtn();
     var search =  $(this).children("#location-search").val().trim();
     $("#location-search").val("");
+    locationLogic(search);
+})
+
+// Select Previous Loaction
+$("#prev-loc-cont").click(function(target){
+    var selectedBtn = $(target)[0].target;
+    $(selectedBtn).siblings(".prev-loc").removeClass("active");
+    $(selectedBtn).addClass("active");
+    var search = selectedBtn.innerText;
+    locationLogic(search);
+})
+
+// Location passed through from search or previous location button press, logic for identifying if it is a city or zip code
+var locationLogic = function(search) {
+    // If search is a zip code
     if(search > 10000 && search < 99999) {
         var city = null;
         var zip = search;
         console.log("Zip Code");
         locationSearch(city, zip);
         locArrHandler(search);
+    // If search is blank
     } else if (!search || search < 10000) {
         alert("Please provide a city or ZIP code in the search bar. Thank you!")
         console.log("No location provided in search bar")
+    // If search is a city
     } else {
         var editCity = search.toLowerCase().split(" ");
         for (var i = 0; i < editCity.length; i++) {
@@ -81,8 +98,16 @@ $("#search-form").submit(function(event){
         locationSearch(city, zip);
         locArrHandler(city);
     }
-})
+}
 
+// Remove active button class from previous locations buttons
+var clearActiveBtn = function(){
+    $.each($(".prev-loc"), function(){
+        $(this).removeClass("active");
+    })
+}
+
+// Generate Location Array (maxes out at 5 items)
 var locArrHandler = function(search) {
     // Skip duplicate values
     if (locationArr.includes(search)) {
@@ -107,13 +132,7 @@ var locArrHandler = function(search) {
     }
 }
 
-$("button").click(function(target){
-    console.log("Click")
-    var prevLoc = $(target);
-    console.log(prevLoc)
-})
-
-
+// Renders/appends the location array to the Previous Location Container
 var renderLocArr = function() {
     var prevLocCont = $("#prev-loc-cont");
     prevLocCont.html("")
@@ -125,6 +144,7 @@ var renderLocArr = function() {
         prevLocCont.append(location);
     }
 }
+
 
 var locationSearch = function(city, zip) {
     console.log("City: ", city,"ZIP: ", zip);
