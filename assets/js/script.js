@@ -43,6 +43,20 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(success, error, options);
 // CURRENT LOCATION ---------------------------------------------- END
 
+var loadLocations = function(){
+    locationArr = JSON.parse(localStorage.getItem("locationArr"));
+
+    if(!locationArr) {
+        locationArr = [];
+    };
+
+    renderLocArr();
+}
+
+var saveLocations = function() {
+    localStorage.setItem("locationArr",JSON.stringify(locationArr));
+}
+
 // Search Location
 $("#search-form").submit(function(event){
     event.preventDefault();
@@ -93,26 +107,15 @@ var locArrHandler = function(search) {
     }
 }
 
-var loadLocations = function(){
-    locationArr = JSON.parse(localStorage.getItem("locationArr"));
 
-    if(!locationArr) {
-        locationArr = [];
-    };
-
-    renderLocArr();
-}
-
-var saveLocations = function() {
-    localStorage.setItem("locationArr",JSON.stringify(locationArr));
-}
 
 var renderLocArr = function() {
-    var locationUl = $("<ul></ul>");
+    var locationUl = $("<div></div>").addClass("list-group");
     for (var i = 0; i < locationArr.length; i++) {
-        var location = $("<li></li>").attr("prev-loc", i).addClass('prev-loc-li');
-        var locationText = $("<h4></h4>").text(locationArr[i]);
-        location.append(locationText);
+        var location = $("<button></button>")
+            .attr("prev-loc", i)
+            .addClass("list-group-item list-group-item-action prev-loc")
+            .text(locationArr[i]);
         locationUl.append(location);
     }
     $("#previous-search").html("")
