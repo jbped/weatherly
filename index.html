@@ -9,25 +9,33 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Weatherly Header  -->
     <header class="container">
         <div class="row">
-            <h1 class="col-lg-8">Weatherly</h1>
-            <div id="search-bar">
-                <form class="form-inline">
-                    <input type="text" name="location-search" id="location-search" class="form-control mr-2">
-                    <button class="btn btn-primary">Search</button>
+            <h1 class="col-lg-9">Weatherly</h1>
+            <!-- Location search bar -->
+            <div id="search-bar col-lg-3">
+                <form id="search-form" class="form-inline">
+                    <!-- Search input -->
+                    <input type="text" name="location-search" id="location-search" class="form-control mr-2" spellcheck="true" placeholder="Enter City or ZIP Code" autocapitalize="word">
+                    <!-- Search Submit -->
+                    <button id="search-btn" class="btn btn-primary">Search</button>
                 </form>
             </div>
         </div>
     </header>
+    <!-- Current/Searched Location Weather -->
     <main class="container">
+        <!-- Current/Searched Location Current Weather -->
         <section class="row">
             <div id="location-container" class="col-lg-8 container">
                 <div id="location-row" class="row">
+                    <!-- Current Weather widget -->
                     <figure id="location-widget" class="col-lg-6 bg-dark">
                         <h4 id="current-temp">79&deg;</h4>
-                        <h3 id="location-title">Current Location</h3>
+                        <h3 id="location-title">TBD</h3>
                     </figure>
+                    <!-- Current Weather stats -->
                     <article id="location-info" class=col-lg-6>
                         <h5>Date: <span id="current-date"></span></h5>
                         <h6>Weather: <span id="current-weather"></span></h6>
@@ -37,12 +45,14 @@
                     </article>
                 </div>
             </div>
+            <!-- Previous Search Items -->
             <div id="prev-locations" class="col-lg-4">
+                <h3 id="previous-location">Previous Locations:</h3>
                 <section id="previous-search">
-                    <h3 id="previous-location">Previous Locations:</h3>
                 </section>
             </div>
         </section>
+        <!-- Current/Searched Location 5-Day Forecast -->
         <section class="row">
             <div class="card col">
                 <div id="day-one-body" class="card-body">
@@ -84,7 +94,6 @@
                     <p id="day-five-humidity">Humidity: <span>To be filled</span></p>
                 </div>
             </div>
-
         </section>
     </main>
 
