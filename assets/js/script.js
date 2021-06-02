@@ -1,9 +1,9 @@
 var defaultCity = "Salt Lake City"
-var apiUrl = "https://api.openweathermap.org/data/2.5/"
-var currentApi = "weather?"
-var forecastApi = "forecast?"
-var forecastExclude = "&exclude=minutely,hourly"
-var apiKey = "&units=imperial&appid=8740010d5ce12cafca0e2a2a6e2bcf85"
+var weatherApi = "https://api.openweathermap.org/data/2.5/onecall"
+var locationApi = "https://api.openweathermap.org/geo/1.0/"
+var forecastExclude = "&exclude=minutely,hourly,alerts"
+var defaultUnits = "&units=imperial"
+var apiKey = "&appid=8740010d5ce12cafca0e2a2a6e2bcf85"
 
 // Current Weather DOM Selectors
 var locationTitle = $("#location-title");
@@ -62,40 +62,9 @@ function success(pos) {
     console.log(`Latitude : ${lat}`);
     console.log(`Longitude: ${lon}`);
 
-    $("#location-title").text("Current Location")
+    getWeather(lat, lon);
+}
 
-    fetch (
-        apiUrl + currentApi + "lat=" + lat + "&lon=" + lon + apiKey
-    )
-    .then (function(response){
-        if (response.ok) {
-            return response.json();
-        } else {
-            alert("Unable to find location")
-        }
-    })
-    .then (function(data){
-        renderCurrent(data)
-
-        return fetch (
-            apiUrl + forecastApi + "lat=" + lat + "&lon=" + lon + apiKey
-        ) 
-        .then (function(response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                alert("Unable to find location")
-            }
-        })
-        .then (function(data){
-            renderForecast(data)
-        })
-        .catch(function(error){
-            alert("Unable to connect to GitHub")
-        })
-    })
-  }
-  
 function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
     $("#location-title").text(defaultCity)
@@ -142,9 +111,7 @@ var locationLogic = function(search) {
     if(search > 10000 && search < 99999) {
         var city = null;
         var zip = search;
-        console.log("Zip Code");
-        locationTitle.text(search);
-        getWeather(city, zip);
+        getLocation(city, zip);
         locArrHandler(search);
     // If search is blank
     } else if (!search || search < 10000) {
@@ -159,7 +126,7 @@ var locationLogic = function(search) {
         var city = editCity.join(" ");
         var zip = null;
         locationTitle.text(city);
-        getWeather(city, zip);
+        getLocation(city, zip);
         locArrHandler(city);
     }
 }
@@ -209,33 +176,29 @@ var renderLocArr = function() {
     }
 }
 
-var renderCurrent = function(response) {
-    var unixDate = response.dt;
-    var milliDate = unixDate * 1000;
-    var dateObj = new Date(milliDate);
-    var convertedDate = dateObj.toLocaleString();
-    console.log(convertedDate);
+var renderWeather = function(response) {
+    var currentUnixDate = response.current.dt;
+    var currentMilliDate = currentUnixDate * 1000;
+    var currentDateObj = new Date(currentMilliDate);
+    var convertedCurrentDate = currentDateObj.toLocaleString();
+    console.log(convertedCurrentDate);
     // Render Date
-    currentDate.text(convertedDate);
+    currentDate.text(convertedCurrentDate);
     locationTitle.text(response.name);
-    currentTemp.text(response.main.temp);
-    currentWeather.text(response.weather[0].main);
-    currentWind.text(response.wind.speed + " mph")
-    currentHumidity.text(response.main.humidity + "%");
-    // currentUv.text(response.)
+    currentTemp.text(response.current.temp);
+    currentWeather.text(response.current.weather[0].main);
+    currentWind.text(response.current.wind_speed + " mph");
+    currentHumidity.text(response.current.humidity + "%");
+    currentUv.text(response.current.uvi);
 
 }
 
-var renderForecast = function(response) {
-
-}
-
-var getWeather = function(city,zip) {
+var getLocation = function(city, zip) {
     if (city !== null) {
         fetch (
-            apiUrl + currentApi + "q=" + city + apiKey
+            locationApi + "direct?q=" + city + apiKey
         )
-        .then (function(response){
+        .then (function(response) {
             if (response.ok) {
                 return response.json();
             } else {
@@ -243,30 +206,20 @@ var getWeather = function(city,zip) {
             }
         })
         .then (function(data){
-            renderCurrent(data)
-    
-            return fetch (
-                apiUrl + forecastApi + "q=" + city + apiKey
-            ) 
-            .then (function(response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    alert("Unable to find location")
-                }
-            })
-            .then (function(data){
-                renderForecast(data)
-            })
-            .catch(function(error){
-                alert("Unable to connect to GitHub")
-            })
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            console.log(lat, lon)
+            getWeather(lat, lon);
         })
-    } else if (zip !== null) {
+        .catch(function(error){
+            alert("Unable to connect to Open Weather 214")
+        })
+    }
+    else if (zip !== null) {
         fetch (
-            apiUrl + currentApi + "zip=" + zip + apiKey
+            locationApi + "zip?zip=" + zip + apiKey
         )
-        .then (function(response){
+        .then (function(response) {
             if (response.ok) {
                 return response.json();
             } else {
@@ -274,75 +227,34 @@ var getWeather = function(city,zip) {
             }
         })
         .then (function(data){
-            renderCurrent(data)
-    
-            return fetch (
-                apiUrl + forecastApi + "zip=" + zip + apiKey
-            ) 
-            .then (function(response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    alert("Unable to find location")
-                }
-            })
-            .then (function(data){
-                renderForecast(data)
-            })
-            .catch(function(error){
-                alert("Unable to connect to GitHub")
-            })
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            console.log(lat, lon);
+            getWeather(lat, lon);
+        })
+        .catch(function(error){
+            alert("Unable to connect to Open Weather 234")
         })
     }
 }
 
-// var locationForecast = function(city, zip) {
-//     if (city === null) {
-//         fetch (
-//         apiUrl + forecastApi + "zip=" + zip + apiKey
-//         )
-//         .then(function(response){
-//             return response.json();
-//         })
-//         .then(function(response){
-//             renderForecast(response)
-//         })
-//     } else if (zip === null) {
-//         fetch (
-//             apiUrl + currentApi + "q=" + city + apiKey
-//             )
-//             .then(function(response){
-//                 return response.json();
-//             })
-//             .then(function(response){
-//                 renderForecast(response)
-//             })
-//     }    
-// }
-
-// var currentWeather = function(city, zip) {
-//     if (city === null) {
-//         fetch (
-//         apiUrl + currentApi + "zip=" + zip + apiKey
-//         )
-//         .then(function(response){
-//             return response.json();
-//         })
-//         .then(function(response){
-//             renderCurrent(response)
-//         })
-//     } else if (zip === null) {
-//         fetch (
-//             apiUrl + currentApi + "q=" + city + apiKey
-//             )
-//             .then(function(response){
-//                 return response.json();
-//             })
-//             .then(function(response){
-//                 renderCurrent(response)
-//             })
-//     }
-
-// }
+var getWeather = function(lat, lon) {
+    fetch (
+        weatherApi + "?lat=" + lat + "&lon=" + lon + forecastExclude + defaultUnits + apiKey
+    )
+    .then (function(response){
+        if (response.ok) {
+            return response.json();
+        } else {
+            alert("Unable to find location")
+        }
+    })
+    .then (function(data){
+        renderWeather(data)
+    })
+    // .catch(function(error){
+    //     alert("Unable to connect to Open Weather 254")
+    // })
+}
 
 loadLocations();
