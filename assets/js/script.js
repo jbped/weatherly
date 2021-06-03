@@ -6,8 +6,11 @@ var defaultUnits = "&units=imperial"
 var apiKey = "&appid=8740010d5ce12cafca0e2a2a6e2bcf85"
 
 // Current Weather DOM Selectors
+var locationContainer = $("#location-container")
 var locationTitle = $("#location-title");
 var currentTemp = $("#current-temp");
+var currentHigh = $("#current-high");
+var currentLow = $("#current-low");
 var currentDate = $("#current-date");
 var currentWeather = $("#current-weather");
 var currentWind = $("#current-wind");
@@ -179,14 +182,23 @@ var renderLocArr = function() {
     }
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 var renderWeather = function(response) {
-    var convertedCurrentDate = (new Date((response.current.dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"numeric",year:"numeric"});
+    var convertedCurrentDate = (new Date((response.current.dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"long",year:"numeric"});
     // Render Date
     currentDate.text(convertedCurrentDate);
     locationTitle.text(response.name);
     // Current Weather
     currentTemp.text(response.current.temp + "\xB0");
-    currentWeather.text(response.current.weather[0].main);
+    currentHigh.text(response.daily[0].temp.max + "\xB0");
+    currentLow.text(response.daily[0].temp.min + "\xB0");
+    var inlineImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.current.weather[0].icon}.png`);
+    currentWeather.html(capitalizeFirstLetter(response.current.weather[0].description));
+    // $("#weather-img").append(inlineImg)
+    currentWeather.append(inlineImg)
     currentWind.text(response.current.wind_speed + " mph");
     currentHumidity.text(response.current.humidity + "%");
     currentUv.text(response.current.uvi);
@@ -199,102 +211,114 @@ var renderWeather = function(response) {
     }
     // Day 1 Weather
     dayOneDate = (new Date((response.daily[1].dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"numeric",year:"numeric"});
-    dayOneTitle.text(dayOneDate);
+    dayOneTitle.text(dayOneDate + " ");
+    var dayOneImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.daily[1].weather[0].icon}.png`);
+    dayOneTitle.append(dayOneImg);
     dayOneTemp.text(response.daily[1].temp.day +"\xB0");
     dayOneWind.text(response.daily[1].wind_speed + " mph");
     dayOneHumidity.text(response.daily[1].humidity + "%");
     // Day 2 Weather
     dayTwoDate = (new Date((response.daily[2].dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"numeric",year:"numeric"});
     dayTwoTitle.text(dayTwoDate);
+    var dayTwoImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.daily[2].weather[0].icon}.png`);
+    dayTwoTitle.append(dayTwoImg);
     dayTwoTemp.text(response.daily[2].temp.day +"\xB0");
     dayTwoWind.text(response.daily[2].wind_speed + " mph");
     dayTwoHumidity.text(response.daily[2].humidity + "%");
     // Day 3 Weather
     dayThreeDate = (new Date((response.daily[3].dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"numeric",year:"numeric"});
     dayThreeTitle.text(dayThreeDate);
+    var dayThreeImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.daily[3].weather[0].icon}.png`);
+    dayThreeTitle.append(dayThreeImg);
     dayThreeTemp.text(response.daily[3].temp.day +"\xB0");
     dayThreeWind.text(response.daily[3].wind_speed + " mph");
     dayThreeHumidity.text(response.daily[3].humidity + "%");
     // Day 4 Weather
     dayFourDate = (new Date((response.daily[4].dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"numeric",year:"numeric"});
     dayFourTitle.text(dayFourDate);
+    var dayFourImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.daily[4].weather[0].icon}.png`);
+    dayFourTitle.append(dayFourImg);
     dayFourTemp.text(response.daily[4].temp.day +"\xB0");
     dayFourWind.text(response.daily[4].wind_speed + " mph");
     dayFourHumidity.text(response.daily[4].humidity + "%");
     // Day 5 Weather
     dayFiveDate = (new Date((response.daily[5].dt) * 1000)).toLocaleString("en-US", {day:"numeric",month:"numeric",year:"numeric"});
     dayFiveTitle.text(dayFiveDate);
+    var dayFiveImg = $("<img>").attr("src", `https://openweathermap.org/img/wn/${response.daily[5].weather[0].icon}.png`);
+    dayFiveTitle.append(dayFiveImg);
     dayFiveTemp.text(response.daily[5].temp.day +"\xB0");
     dayFiveWind.text(response.daily[5].wind_speed + " mph");
     dayFiveHumidity.text(response.daily[5].humidity + "%");
-
-
 }
 
-// var getLocation = function(city, zip) {
-//     if (city !== null) {
-//         fetch (
-//             locationApi + "direct?q=" + city + apiKey
-//         )
-//         .then (function(response) {
-//             if (response.ok) {
-//                 return response.json();
-//             } else {
-//                 alert("Unable to find location")
-//             }
-//         })
-//         .then (function(data){
-//             var lat = data[0].lat;
-//             var lon = data[0].lon;
-//             console.log(lat, lon);
-//             locationTitle.text(data[0].name);
-//             getWeather(lat, lon);
-//         })
-//         .catch(function(error){
-//             alert("Unable to connect to Open Weather 214")
-//         })
-//     }
-//     else if (zip !== null) {
-//         fetch (
-//             locationApi + "zip?zip=" + zip + apiKey
-//         )
-//         .then (function(response) {
-//             if (response.ok) {
-//                 return response.json();
-//             } else {
-//                 alert("Unable to find location")
-//             }
-//         })
-//         .then (function(data){
-//             var lat = data.lat;
-//             var lon = data.lon;
-//             console.log(lat, lon);
-//             locationTitle.text(data.name + " (" + zip + ")");
-//             getWeather(lat, lon);
-//         })
-//         .catch(function(error){
-//             alert("Unable to connect to Open Weather 234")
-//         })
-//     }
-// }
+var weatherIcon = function(weatherId) {
+    
+}
 
-// var getWeather = function(lat, lon) {
-//     fetch (
-//         weatherApi + "?lat=" + lat + "&lon=" + lon + forecastExclude + defaultUnits + apiKey
-//     )
-//     .then (function(response){
-//         if (response.ok) {
-//             return response.json();
-//         } else {
-//             alert("Unable to find location")
-//         }
-//     })
-//     .then (function(data){
-//         renderWeather(data)
-//     })
-//     // .catch(function(error){
-//     //     alert("Unable to connect to Open Weather 254")
-//     // })
-// }
+var getLocation = function(city, zip) {
+    if (city !== null) {
+        fetch (
+            locationApi + "direct?q=" + city + apiKey
+        )
+        .then (function(response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                alert("Unable to find location")
+            }
+        })
+        .then (function(data){
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            console.log(lat, lon);
+            locationTitle.text(data[0].name);
+            getWeather(lat, lon);
+        })
+        .catch(function(error){
+            alert("Unable to connect to Open Weather 214")
+        })
+    }
+    else if (zip !== null) {
+        fetch (
+            locationApi + "zip?zip=" + zip + apiKey
+        )
+        .then (function(response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                alert("Unable to find location")
+            }
+        })
+        .then (function(data){
+            var lat = data.lat;
+            var lon = data.lon;
+            console.log(lat, lon);
+            locationTitle.text(data.name + " (" + zip + ")");
+            getWeather(lat, lon);
+        })
+        .catch(function(error){
+            alert("Unable to connect to Open Weather 234")
+        })
+    }
+}
+
+var getWeather = function(lat, lon) {
+    fetch (
+        weatherApi + "?lat=" + lat + "&lon=" + lon + forecastExclude + defaultUnits + apiKey
+    )
+    .then (function(response){
+        if (response.ok) {
+            return response.json();
+        } else {
+            alert("Unable to find location")
+        }
+    })
+    .then (function(data){
+        renderWeather(data)
+    })
+    // .catch(function(error){
+    //     alert("Unable to connect to Open Weather 254")
+    // })
+}
 
 loadLocations();

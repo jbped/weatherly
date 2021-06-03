@@ -30,26 +30,26 @@
     <main class="container">
         <!-- Current/Searched Location Current Weather -->
         <section class="row mt-5 d-flex">
-            <div id="location-container" class="col-lg-8 container">
-                <div id="location-row" class="row h-100">
-                    <!-- Current Weather widget -->
-                    <figure id="location-widget" class="col-lg-6 bg-dark mb-0 d-flex flex-column">
-                        <h4 id="current-temp" class="ml-auto text-light">79&deg;</h4>
-                        <h3 id="location-title" class="ml-auto mt-auto text-light">TBD</h3>
-                    </figure>
-                    <!-- Current Weather stats -->
-                    <article id="location-info" class="col-lg-6 d-flex flex-column justify-content-between">
-                        <h5>Date: <span id="current-date"></span></h5>
-                        <h6>Weather: <span id="current-weather"></span></h6>
-                        <h6>Wind speed: <span id="current-wind"></span></h6>
-                        <h6>Humidity: <span id="current-humidity"></span></h6>
-                        <h6>UV Index: <span id="current-uv"></span></h6>
-                    </article>
-                </div>
+            <div id="location-container" class="col-lg-8">
+                    <h2 id="location-title" class="">TBD</h2>
+                    <h6 class="text-muted pl-3" id="current-date">Date</h6>
+                <!-- Current Weather stats -->
+                <h4>Current temp: <span id="current-temp">79&deg;</span></h4>
+                <article id="location-temps" class="pl-3">
+                    <h6 class="text-muted">High: <span id="current-high"></span></h6>
+                    <h6 class="text-muted">Low: <span id="current-low"></span></h6>
+                </article>  
+                <h4 class="pt-3 pl-0 mb-0">Current weather: <span id="current-weather"></span></h4>
+                <article id="location-info" class="col-lg-6 d-flex flex-column h-100 pl-3 pt-0">
+                    <div id="weather-img"></div>
+                    <h6>Wind speed: <span id="current-wind"></span></h6>
+                    <h6>Humidity: <span id="current-humidity"></span></h6>
+                    <h6>UV Index: <strong><span id="current-uv"></span></strong></h6>
+                </article>             
             </div>
             <!-- Previous Search Items -->
             <div id="prev-locations" class="col-lg-4 order-sm-1">
-                <h3 id="previous-location-title">Previous Locations:</h3>
+                <h2 id="previous-location-title">Previous Locations:</h2>
                 <div id="prev-loc-cont" class="list-group">
                 </div>
             </div>
@@ -59,41 +59,41 @@
             <div class="card col-lg col-sm-12">
                 <div id="day-one-body" class="card-body">
                     <h5 id="day-one-title" class="card-title">Day 1</h5>
-                    <p id="day-one-temp">Temperature: <span id="day-one-temp-span">To be filled</span></p>
-                    <p id="day-one-wind">Wind Speed: <span id="day-one-wind-span">To be filled</span></p>
-                    <p id="day-one-humidity">Humidity: <span id="day-one-humidity-span">To be filled</span></p>
+                    <p id="day-one-temp"><strong>Temperature: </strong><span id="day-one-temp-span">To be filled</span></p>
+                    <p id="day-one-wind"><strong>Wind Speed: </strong><span id="day-one-wind-span">To be filled</span></p>
+                    <p id="day-one-humidity"><strong>Humidity: </strong><span id="day-one-humidity-span">To be filled</span></p>
                 </div>
             </div>
             <div class="card col-lg col-sm-12">
                 <div id="day-two-body" class="card-body">
                     <h5 id="day-two-title" class="card-title">Day 2</h5>
-                    <p id="day-two-temp">Temperature: <span id="day-two-temp-span">To be filled</span></p>
-                    <p id="day-two-wind">Wind Speed: <span id="day-two-wind-span">To be filled</span></p>
-                    <p id="day-two-humidity">Humidity: <span id="day-two-humidity-span">To be filled</span></p>
+                    <p id="day-two-temp"><strong>Temperature: </strong><span id="day-two-temp-span">To be filled</span></p>
+                    <p id="day-two-wind"><strong>Wind Speed: </strong><span id="day-two-wind-span">To be filled</span></p>
+                    <p id="day-two-humidity"><strong>Humidity: </strong><span id="day-two-humidity-span">To be filled</span></p>
                 </div>
             </div>
             <div class="card col-lg col-sm-12">
                 <div id="day-three-body" class="card-body">
                     <h5 id="day-three-title" class="card-title">Day 3</h5>
-                    <p id="day-three-temp">Temperature: <span id="day-three-temp-span">To be filled</span></p>
-                    <p id="day-three-wind">Wind Speed: <span id="day-three-wind-span">To be filled</span></p>
-                    <p id="day-three-humidity">Humidity: <span id="day-three-humidity-span">To be filled</span></p>
+                    <p id="day-three-temp"><strong>Temperature: </strong><span id="day-three-temp-span">To be filled</span></p>
+                    <p id="day-three-wind"><strong>Wind Speed: </strong><span id="day-three-wind-span">To be filled</span></p>
+                    <p id="day-three-humidity"><strong>Humidity: </strong><span id="day-three-humidity-span">To be filled</span></p>
                 </div>
             </div>
             <div class="card col-lg col-sm-12">
                 <div id="day-four-body" class="card-body">
                     <h5 id="day-four-title" class="card-title">Day 4</h5>
-                    <p id="day-four-temp">Temperature: <span id="day-four-temp-span">To be filled</span></p>
-                    <p id="day-four-wind">Wind Speed: <span id="day-four-wind-span">To be filled</span></p>
-                    <p id="day-four-humidity">Humidity: <span id="day-four-humidity-span">To be filled</span></p>
+                    <p id="day-four-temp"><strong>Temperature: </strong><span id="day-four-temp-span">To be filled</span></p>
+                    <p id="day-four-wind"><strong>Wind Speed: </strong><span id="day-four-wind-span">To be filled</span></p>
+                    <p id="day-four-humidity"><strong>Humidity: </strong><span id="day-four-humidity-span">To be filled</span></p>
                 </div>
             </div>
             <div class="card col-lg col-sm-12">
                 <div id="day-five-body" class="card-body">
                     <h5 id="day-five-title" class="card-title">Day 5</h5>
-                    <p id="day-five-temp">Temperature: <span id="day-five-temp-span">To be filled</span></p>
-                    <p id="day-five-wind">Wind Speed: <span id="day-five-wind-span">To be filled</span></p>
-                    <p id="day-five-humidity">Humidity: <span id="day-five-humidity-span">To be filled</span></p>
+                    <p id="day-five-temp"><strong>Temperature: </strong><span id="day-five-temp-span">To be filled</span></p>
+                    <p id="day-five-wind"><strong>Wind Speed: </strong><span id="day-five-wind-span">To be filled</span></p>
+                    <p id="day-five-humidity"><strong>Humidity: </strong><span id="day-five-humidity-span">To be filled</span></p>
                 </div>
             </div>
         </section>

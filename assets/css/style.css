@@ -5,6 +5,13 @@ header {
     height:8vh;
 }
 
+#location-container {
+     background-repeat: no-repeat;
+     background-position-y: center;
+     background-position-x: right;
+     background-size: 10%;
+}
+
 /* Previous Locations Styling */
 .prev-loc-li {
     list-style-type: none;
