@@ -1,4 +1,23 @@
+/* Header Styling */
+header {
+    background-image: url("../images/weather-background.jpg");
+    background-position-y: -80px;
+    height:8vh;
+}
+
 /* Previous Locations Styling */
 .prev-loc-li {
     list-style-type: none;
+}
+
+.severe-uv {
+    color: red;
+}
+
+.moderate-uv {
+    color: yellow;
+}
+
+.low-uv {
+    color: green;
 }
