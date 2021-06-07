@@ -62,7 +62,7 @@ function success(pos) {
 
     // return (lat, lon)
     console.log('Your current position is:');
-    console.log(`Latitude : ${lat}`);
+    console.log(`Latitude: ${lat}`);
     console.log(`Longitude: ${lon}`);
 
     locationTitle.text("Current Location")
@@ -102,7 +102,7 @@ $("#search-form").submit(function(event){
     locationLogic(search);
 })
 
-// Select Previous Loaction
+// Select Previous Location
 $("#prev-loc-cont").click(function(target){
     var selectedBtn = $(target)[0].target;
     $(selectedBtn).siblings(".prev-loc").removeClass("active");
@@ -182,8 +182,8 @@ var renderLocArr = function() {
     }
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+function capitalizeFirstLetter(weather) {
+    return weather.charAt(0).toUpperCase() + weather.slice(1);
   }
 
 var renderWeather = function(response) {
@@ -316,9 +316,9 @@ var getWeather = function(lat, lon) {
     .then (function(data){
         renderWeather(data)
     })
-    // .catch(function(error){
-    //     alert("Unable to connect to Open Weather 254")
-    // })
+    .catch(function(error){
+        alert("Unable to connect to Open Weather 254")
+    })
 }
 
 loadLocations();

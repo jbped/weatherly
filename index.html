@@ -27,19 +27,19 @@
         </div>
     </header>
     <!-- Current/Searched Location Weather -->
-    <main class="container">
+    <main class="container" >
         <!-- Current/Searched Location Current Weather -->
-        <section class="row mt-5 d-flex">
-            <div id="location-container" class="col-lg-8">
-                    <h2 id="location-title" class="">TBD</h2>
-                    <h6 class="text-muted pl-3" id="current-date">Date</h6>
+        <section class="row mt-5 d-flex rounded pb-3" id="cur-prev-cont">
+            <div id="location-container" class="col-lg-8 p-0">
+                    <h2 id="location-title" class="w-100 px-2">TBD</h2>
+                    <h6 class="text-dark pl-3" id="current-date">Date</h6>
                 <!-- Current Weather stats -->
-                <h4>Current temp: <span id="current-temp">79&deg;</span></h4>
+                <h4 class="px-2">Current temp: <span id="current-temp">79&deg;</span></h4>
                 <article id="location-temps" class="pl-3">
-                    <h6 class="text-muted">High: <span id="current-high"></span></h6>
-                    <h6 class="text-muted">Low: <span id="current-low"></span></h6>
+                    <h6 class="text-dark">High: <span id="current-high"></span></h6>
+                    <h6 class="text-dark">Low: <span id="current-low"></span></h6>
                 </article>  
-                <h4 class="pt-3 pl-0 mb-0">Current weather: <span id="current-weather"></span></h4>
+                <h4 class="pt-3 px-2 mb-0">Current weather: <span id="current-weather"></span></h4>
                 <article id="location-info" class="col-lg-6 d-flex flex-column h-100 pl-3 pt-0">
                     <div id="weather-img"></div>
                     <h6>Wind speed: <span id="current-wind"></span></h6>
@@ -48,15 +48,16 @@
                 </article>             
             </div>
             <!-- Previous Search Items -->
-            <div id="prev-locations" class="col-lg-4 order-sm-1">
-                <h2 id="previous-location-title">Previous Locations:</h2>
-                <div id="prev-loc-cont" class="list-group">
+            <div id="prev-locations" class="col-lg-4 order-sm-1 p-0">
+                <h2 id="previous-location-title" class="px-2">Previous Locations:</h2>
+                <div id="prev-loc-cont" class="list-group px-3">
                 </div>
             </div>
         </section>
         <!-- Current/Searched Location 5-Day Forecast -->
-        <section class="row mt-5 d-flex justify-content-between pr-3 pl-3">
-            <div class="card col-lg col-sm-12">
+        <section class="row mt-5 d-flex justify-content-between">
+            <h2 class="col-12">5-Day Forecast</h2>
+            <div class="card col-lg col-sm-12 mx-1">
                 <div id="day-one-body" class="card-body">
                     <h5 id="day-one-title" class="card-title">Day 1</h5>
                     <p id="day-one-temp"><strong>Temperature: </strong><span id="day-one-temp-span">To be filled</span></p>
@@ -64,7 +65,7 @@
                     <p id="day-one-humidity"><strong>Humidity: </strong><span id="day-one-humidity-span">To be filled</span></p>
                 </div>
             </div>
-            <div class="card col-lg col-sm-12">
+            <div class="card col-lg col-sm-12 mx-1">
                 <div id="day-two-body" class="card-body">
                     <h5 id="day-two-title" class="card-title">Day 2</h5>
                     <p id="day-two-temp"><strong>Temperature: </strong><span id="day-two-temp-span">To be filled</span></p>
@@ -72,7 +73,7 @@
                     <p id="day-two-humidity"><strong>Humidity: </strong><span id="day-two-humidity-span">To be filled</span></p>
                 </div>
             </div>
-            <div class="card col-lg col-sm-12">
+            <div class="card col-lg col-sm-12 mx-1">
                 <div id="day-three-body" class="card-body">
                     <h5 id="day-three-title" class="card-title">Day 3</h5>
                     <p id="day-three-temp"><strong>Temperature: </strong><span id="day-three-temp-span">To be filled</span></p>
@@ -80,7 +81,7 @@
                     <p id="day-three-humidity"><strong>Humidity: </strong><span id="day-three-humidity-span">To be filled</span></p>
                 </div>
             </div>
-            <div class="card col-lg col-sm-12">
+            <div class="card col-lg col-sm-12 mx-1">
                 <div id="day-four-body" class="card-body">
                     <h5 id="day-four-title" class="card-title">Day 4</h5>
                     <p id="day-four-temp"><strong>Temperature: </strong><span id="day-four-temp-span">To be filled</span></p>
@@ -88,7 +89,7 @@
                     <p id="day-four-humidity"><strong>Humidity: </strong><span id="day-four-humidity-span">To be filled</span></p>
                 </div>
             </div>
-            <div class="card col-lg col-sm-12">
+            <div class="card col-lg col-sm-12 mx-1">
                 <div id="day-five-body" class="card-body">
                     <h5 id="day-five-title" class="card-title">Day 5</h5>
                     <p id="day-five-temp"><strong>Temperature: </strong><span id="day-five-temp-span">To be filled</span></p>
